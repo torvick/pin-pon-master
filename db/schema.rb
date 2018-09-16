@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180916192219) do
+ActiveRecord::Schema.define(version: 20180916192318) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.integer "from_user_id"
-    t.integer "to_user_id"
+    t.bigint "from_user_id"
+    t.bigint "to_user_id"
     t.string "winner"
     t.string "loser"
     t.boolean "status"
@@ -25,8 +28,8 @@ ActiveRecord::Schema.define(version: 20180916192219) do
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "game_id"
+    t.bigint "user_id"
+    t.bigint "game_id"
     t.float "value"
     t.string "description"
     t.boolean "status"
@@ -55,4 +58,8 @@ ActiveRecord::Schema.define(version: 20180916192219) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "games", "users", column: "from_user_id"
+  add_foreign_key "games", "users", column: "to_user_id"
+  add_foreign_key "ratings", "games"
+  add_foreign_key "ratings", "users"
 end

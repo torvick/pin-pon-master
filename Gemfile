@@ -12,6 +12,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
+gem 'pg', '~> 0.18'
 
 gem 'devise'
 gem 'devise-i18n'
