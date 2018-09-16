@@ -10,16 +10,16 @@
             <th scope="col">#</th>
             <th scope="col">Player 1</th>
             <th scope="col">Player 2</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Games</th>
+            <th scope="col">Winner</th>
+            <th scope="col">Loser</th>
           </tr>
           </thead>
           <tbody>
           <% @games.each do |game| %>
             <tr>
               <td><%= game.id%></td>
-              <td><%= game.from_user_id %></td>
-              <td><%= game.to_user_id %></td>
+              <td><%= game.from_user.alias %></td>
+              <td><%= game.to_user.alias  %></td>
               <td><%= game.winner %></td>
               <td><%= game.loser %></td>
             </tr>

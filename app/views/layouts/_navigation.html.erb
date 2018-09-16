@@ -1,9 +1,25 @@
 
 <ul class="nav justify-content-end">
   <li class="nav-item">
-
-    <%= link_to 'PinPon-Master', unauthenticated_root_path(), class: "nav-link active" %>
+    <%if current_user.nil?%>
+      <%= link_to 'PinPon-Master', unauthenticated_root_path(), class: "nav-link active" %>
+    <%else%>
+      <%= link_to 'PinPon-Master', unauthenticated_root_path(), class: "nav-link active" %>
+    <%end%>
   </li>
+  <%if current_user%>
+    <li>
+      <%= link_to 'Users', root_path(), class: "nav-link active"%>
+    </li>
+
+    <li>
+      <%= link_to 'Ratings', ratings_path(), class: "nav-link active"%>
+    </li>
+
+    <li>
+      <%= link_to 'Games', games_path(), class: "nav-link active"%>
+    </li>
+  <%end%>
   <li class="nav-item">
     <%if current_user.nil?%>
       <%= link_to 'Sign in', new_user_session_path, class: "nav-link active" %>

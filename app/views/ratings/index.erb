@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="col-md-12 panel panel-default panel-body">
+        <div class="">
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Player</th>
+                <th scope="col">Play</th>
+                <th scope="col">Value</th>
+                <th scope="col">Description</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @ratings.each do |raiting| %>
+                <tr>
+                  <td><%= raiting.id%></td>
+                  <td><%= raiting.user.alias %></td>
+                  <td><%= raiting.game_id %></td>
+                  <td><%= raiting.value %></td>
+                  <td><%= raiting.description %></td>
+                </tr>
+              <%end%>
+
+              </tbody>
+            </table>
+            <%#= link_to 'New raiting', new_rating_path() %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

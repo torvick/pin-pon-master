@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :games, dependent: :delete_all
   has_many :ratings, dependent: :delete_all
+
+  validates :alias, uniqueness: true
 end

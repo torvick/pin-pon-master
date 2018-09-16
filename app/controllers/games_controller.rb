@@ -17,9 +17,34 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-
+    @game.from_user_id = current_user.id
+    player_1 = RatedPlayer.new("#{@game.from_user.alias}",@game.from_user.rating)
+    player_2 = RatedPlayer.new("#{@game.to_user.alias}",@game.from_user.rating)
+    Match.new(player_1,player_2,1)
+    if player_1.rating > player_2.rating
+      @game.winner = @game.from_user.alias
+      @game.loser = @game.to_user.alias
+    else
+      @game.winner = @game.to_user.alias
+      @game.loser = @game.from_user.alias
+    end
     respond_to do |format|
       if @game.save
+        rating_from = Rating.new(user_id: current_user.id, game_id: @game.id, value: player_1.rating, description: "Game with #{@game.to_user.alias}")
+        rating_to = Rating.new(user_id: @game.to_user_id, game_id: @game.id, value: player_2.rating, description: "Game with #{@game.from_user.alias}")
+
+        if rating_from.save
+          current_user.rating = rating_from.value
+          current_user.save
+        end
+
+
+        if rating_to.save
+          current_user_to = User.find(@game.to_user_id)
+          current_user_to.rating = rating_to.value
+          current_user_to.save
+        end
+
         format.html {redirect_to @game, notice: 'Payment was successfully created.'}
         format.json {render :show, status: :created, location: @game}
       else
