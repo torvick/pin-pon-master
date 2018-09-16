@@ -1,0 +1,52 @@
+<div class="container">
+  <h2 class="text-center text-uppercase text-secondary mb-0">Game</h2>
+  <hr class="star-dark mb-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+
+      <%= form_with(model: @game, local: true) do |f| %>
+        <div class="x_content">
+          <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+            <div class="<%= @game.errors[:from_user_id].any? ? " error" : "" %>">
+              <%= f.text_field :from_user_id, autofocus: true, :class => "form-control has-feedback-left", :placeholder => "Player 1", value: "#{current_user.name} | #{current_user.alias}" %>
+              <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+              <span class="help-inline ">
+                          <%= @game.errors[:from_user_id].any? ? @game.errors[:from_user_id].to_s[/\w([^"]*)/] : "" %></span>
+            </div>
+          </div>
+
+          <div class="col-md-12 col-sm-12 col-xs-12 form-group has-feedback">
+            <div class="<%= @game.errors[:to_user_id].any? ? " error" : "" %>">
+              <%= f.select :to_user_id, options_for_select(User.where.not(id: current_user.id).map{ |c|["#{c.name}||#{c.alias}", c.id]}.uniq, selected: f.object.to_user_id), {include_blank: 'Select Player'}, { :class => 'form-control', :id => "to_user_id"}%>
+
+              <span class="help-inline ">
+                      <%= @game.errors[:to_user_id].any? ? @game.errors[:to_user_id].to_s[/\w([^"]*)/] : "" %></span>
+            </div>
+          </div>
+
+          <%= f.submit "Register", :class => "btn btn-primary" %>
+        </div>
+      <% end %>
+      <div class="x_content">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

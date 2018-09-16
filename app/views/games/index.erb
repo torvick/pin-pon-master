@@ -1,0 +1,36 @@
+<div class="container">
+<div class="row">
+  <div class="col-lg-12 mx-auto">
+  <div class="col-md-12 panel panel-default panel-body">
+    <div class="">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Player 1</th>
+            <th scope="col">Player 2</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Games</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @games.each do |game| %>
+            <tr>
+              <td><%= game.id%></td>
+              <td><%= game.from_user_id %></td>
+              <td><%= game.to_user_id %></td>
+              <td><%= game.winner %></td>
+              <td><%= game.loser %></td>
+            </tr>
+          <%end%>
+
+          </tbody>
+        </table>
+        <%= link_to 'New Game', new_game_path() %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

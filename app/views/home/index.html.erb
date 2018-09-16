@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 mx-auto">
+      <div class="col-md-12 panel panel-default panel-body">
+        <div class="">
+          <div class="col-md-12">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Alias</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Games</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= user.id%></td>
+                  <td><%= "#{user.name} #{user.last_name}" %></td>
+                  <td><%= user.alias %></td>
+                  <td><%= user.rating %></td>
+                  <td><%= games_total(user)%></td>
+                </tr>
+              <%end%>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
